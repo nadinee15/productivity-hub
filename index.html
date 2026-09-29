@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Math Sprint 🚀 Cosmic Number Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #070913;
+            --panel-bg: rgba(15, 23, 42, 0.75);
+            --panel-border: rgba(56, 189, 248, 0.25);
+            --panel-border-glow: rgba(56, 189, 248, 0.4);
+            --neon-cyan: #38bdf8;
+            --neon-blue: #6366f1;
+            --neon-purple: #a855f7;
+            --neon-amber: #f59e0b;
+            --neon-pink: #ec4899;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --radius-xl: 28px;
+            --radius-lg: 18px;
+            --radius-md: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #starfield-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .nebula-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: 0;
+            animation: nebulaPulse 14s infinite alternate ease-in-out;
+        }
+
+        .nebula-1 {
+            width: 450px;
+            height: 450px;
+            background: #6366f1;
+            top: -100px;
+            left: -100px;
+        }
+
+        .nebula-2 {
+            width: 500px;
+            height: 500px;
+            background: #a855f7;
+            bottom: -150px;
+            right: -100px;
+            animation-delay: -7s;
+        }
+
+        @keyframes nebulaPulse {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.25; }
+            100% { transform: scale(1.2) translate(30px, 40px); opacity: 0.45; }
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 440px;
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1.5px solid var(--panel-border);
+            border-radius: var(--radius-xl);
+            padding: 22px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.1);
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .app-container:hover {
+            border-color: var(--panel-border-glow);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(56, 189, 248, 0.18);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .brand-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--neon-cyan);
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-md);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: var(--neon-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+        }
+
+        .icon-btn:active {
+            transform: scale(0.95);
+        }
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+            animation: fadeInScale 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.96) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .difficulty-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .diff-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-lg);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .diff-card:hover {
+            background: rgba(56, 189, 248, 0.08);
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateX(4px);
+        }
+
+        .diff-card.selected {
+            border-color: var(--neon-cyan);
+            background: rgba(56, 189, 248, 0.12);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+        }
+
+        .diff-title {
+            font-weight: 700;
+            font-size: 0.98rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .diff-desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .badge-score {
+            font-size: 0.8rem;
+            font-weight: 700;
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--neon-amber);
+            padding: 4px 10px;
+            border-radius: 50px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0284c7 0%, #6366f1 100%);
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 14px;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(2, 132, 199, 0.35);
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(2, 132, 199, 0.5);
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .guide-box {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            border: 1px dashed rgba(255, 255, 255, 0.12);
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        .guide-box strong {
+            color: var(--neon-cyan);
+        }
+
+        .guide-box ul {
+            padding-left: 18px;
+            margin-top: 4px;
+        }
+
+        .hud-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px 16px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hud-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hud-lbl {
+            font-size: 0.68rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .hud-val {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+        }
+
+        .combo-badge {
+            background: linear-gradient(135deg, #f59e0b, #ec4899);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: white;
+            display: none;
+            box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
+            animation: pulseGlow 1s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { transform: scale(1); box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
+            to { transform: scale(1.06); box-shadow: 0 0 20px rgba(236, 72, 153, 0.6); }
+        }
+
+        .timer-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .timer-fill {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            border-radius: 20px;
+            transition: width 0.1s linear;
+        }
+
+        .question-box {
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid var(--neon-cyan);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .question-math {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+        }
+
+        .float-pop {
+            position: absolute;
+            top: -12px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: rgba(56, 189, 248, 0.2);
+            border: 1px solid var(--neon-cyan);
+            padding: 2px 10px;
+            border-radius: 50px;
+            color: var(--neon-cyan);
+        }
+
+        .float-pop.show {
+            opacity: 1;
+            transform: translateY(-10px) scale(1.1);
+        }
+
+        .answer-screen {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-lg);
+            height: 52px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            letter-spacing: 3px;
+        }
+
+        .numpad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .key-tile {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            height: 52px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .key-tile:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .key-tile:active {
+            transform: scale(0.94);
+            background: rgba(56, 189, 248, 0.2);
+            border-color: var(--neon-cyan);
+        }
+
+        .key-tile.btn-clear {
+            background: rgba(239, 68, 68, 0.12);
+            color: #f87171;
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .key-tile.btn-clear:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+
+        .key-tile.btn-submit {
+            background: linear-gradient(135deg, #0284c7, #6366f1);
+            color: white;
+            border: none;
+            grid-column: span 2;
+            box-shadow: 0 4px 16px rgba(2, 132, 199, 0.3);
+        }
+
+        .summary-card {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            letter-spacing: 1px;
+        }
+
+        .stats-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+        }
+
+        .matrix-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .matrix-val {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+        }
+
+        .matrix-lbl {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .shake-anim {
+            animation: shake 0.35s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-3px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+            40%, 60% { transform: translate3d(6px, 0, 0); }
+        }
+
+        #confetti-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 20;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="starfield-canvas"></canvas>
+    <div class="nebula-glow nebula-1"></div>
+    <div class="nebula-glow nebula-2"></div>
+
+    <div class="app-container">
+        <canvas id="confetti-canvas"></canvas>
+
+        <header class="header">
+            <div class="brand-title">
+                <span>🚀 MATH SPRINT</span>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" id="sound-btn" title="Suara On/Off">🔊</button>
+            </div>
+        </header>
+
+        <main id="menu-screen" class="screen active">
+            <div>
+                <div class="section-label" style="margin-bottom:8px;">Pilih Level Misi</div>
+                <div class="difficulty-list">
+                    <button class="diff-card selected" data-diff="easy">
+                        <div>
+                            <div class="diff-title">🛸 Easy (Cosmic Scout)</div>
+                            <div class="diff-desc">Tambah & Kurang (1-20) • 8 Dtk</div>
+                        </div>
+                        <div class="badge-score">👑 <span id="hs-easy">0</span></div>
+                    </button>
+
+                    <button class="diff-card" data-diff="medium">
+                        <div>
+                            <div class="diff-title">⚡ Medium (Star Pilot)</div>
+                            <div class="diff-desc">Tambah, Kurang, Kali (1-50) • 5 Dtk</div>
+                        </div>
+                        <div class="badge-score">👑 <span id="hs-medium">0</span></div>
+                    </button>
+
+                    <button class="diff-card" data-diff="hard">
+                        <div>
+                            <div class="diff-title">🌌 Hard (Galaxy Master)</div>
+                            <div class="diff-desc">Termasuk Bagi & Angka Besar • 3.5 Dtk</div>
+                        </div>
+                        <div class="badge-score">👑 <span id="hs-hard">0</span></div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="guide-box">
+                <strong>💡 Cara Bermain:</strong>
+                <ul>
+                    <li>Jawab pertanyaan matematika sebelum timer waktu per soal habis!</li>
+                    <li>Jawaban benar beruntun akan memicu <strong>Combo Multiplier</strong> Poin! 🔥</li>
+                    <li>Raih rekor tertinggi di setiap tingkat kesulitan kosmik! 🏆</li>
+                </ul>
+            </div>
+
+            <button id="start-btn" class="btn-primary">
+                <span>MULAI MISI</span> 🚀
+            </button>
+        </main>
+
+        <main id="game-screen" class="screen">
+            <div class="hud-bar">
+                <div class="hud-item">
+                    <span class="hud-lbl">Skor</span>
+                    <span class="hud-val" id="score-display">0</span>
+                </div>
+                <div class="combo-badge" id="combo-badge">🔥 x2 COMBO</div>
+                <div class="hud-item" style="text-align: right;">
+                    <span class="hud-lbl">Soal Benar</span>
+                    <span class="hud-val" id="answered-count-display">0</span>
+                </div>
+            </div>
+
+            <div class="timer-track">
+                <div class="timer-fill" id="timer-bar"></div>
+            </div>
+
+            <div class="question-box" id="question-card">
+                <div class="float-pop" id="float-feedback">+100 Poin</div>
+                <div class="question-math" id="question-text">12 + 8</div>
+            </div>
+
+            <div class="answer-screen" id="answer-display"></div>
+
+            <div class="numpad">
+                <button class="key-tile" data-key="1">1</button>
+                <button class="key-tile" data-key="2">2</button>
+                <button class="key-tile" data-key="3">3</button>
+                <button class="key-tile" data-key="4">4</button>
+                <button class="key-tile" data-key="5">5</button>
+                <button class="key-tile" data-key="6">6</button>
+                <button class="key-tile" data-key="7">7</button>
+                <button class="key-tile" data-key="8">8</button>
+                <button class="key-tile" data-key="9">9</button>
+                <button class="key-tile btn-clear" data-key="clear">C</button>
+                <button class="key-tile" data-key="0">0</button>
+                <button class="key-tile btn-clear" data-key="backspace">⌫</button>
+                <button class="key-tile btn-submit" data-key="enter">JAWAB ➔</button>
+            </div>
+        </main>
+
+        <main id="gameover-screen" class="screen">
+            <div class="summary-card">
+                <div class="summary-title">MISI SELESAI 🌌</div>
+
+                <div class="stats-matrix">
+                    <div class="matrix-box">
+                        <span class="matrix-val" id="final-score">0</span>
+                        <span class="matrix-lbl">Skor Akhir</span>
+                    </div>
+                    <div class="matrix-box">
+                        <span class="matrix-val" id="total-questions">0</span>
+                        <span class="matrix-lbl">Soal Benar</span>
+                    </div>
+                    <div class="matrix-box">
+                        <span class="matrix-val" id="max-streak">0🔥</span>
+                        <span class="matrix-lbl">Combo Maksimal</span>
+                    </div>
+                    <div class="matrix-box">
+                        <span class="matrix-val" id="final-accuracy">100%</span>
+                        <span class="matrix-lbl">Rekor Poin</span>
+                    </div>
+                </div>
+
+                <p id="gameover-reason" style="color: var(--text-secondary); font-size: 0.85rem; font-weight: 500;"></p>
+            </div>
+
+            <button id="restart-btn" class="btn-primary">
+                <span>MAIN LAGI</span> 🚀
+            </button>
+            <button id="menu-btn" class="diff-card" style="justify-content: center; font-weight: 700; color: var(--neon-cyan);">
+                Kembali ke Menu Utama 🪐
+            </button>
+        </main>
+    </div>
+
+    <script>
+        let currentDifficulty = 'easy';
+        let score = 0;
+        let streak = 0;
+        let maxStreak = 0;
+        let totalAnswered = 0;
+        let soundEnabled = true;
+        let currentAnswer = '';
+        let targetSolution = 0;
+        let timerInterval = null;
+        let timeRemaining = 0;
+        let totalQuestionTime = 8;
+        let isGameActive = false;
+
+        const DIFFICULTY_SETTINGS = {
+            easy: { time: 8, basePoints: 100 },
+            medium: { time: 5, basePoints: 200 },
+            hard: { time: 3.5, basePoints: 350 }
+        };
+
+        function initStarfield() {
+            const canvas = document.getElementById('starfield-canvas');
+            const ctx = canvas.getContext('2d');
+            let stars = [];
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                stars = [];
+                const numStars = Math.floor((canvas.width * canvas.height) / 3000);
+                for (let i = 0; i < numStars; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        size: Math.random() * 1.8 + 0.5,
+                        opacity: Math.random(),
+                        speed: Math.random() * 0.02 + 0.005
+                    });
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                stars.forEach(star => {
+                    star.opacity += star.speed;
+                    if (star.opacity > 1 || star.opacity < 0.2) {
+                        star.speed = -star.speed;
+                    }
+                    ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.opacity)})`;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+            animate();
+        }
+
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new AudioContext();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'correct') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.12);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                } else if (type === 'combo') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(783.99, now);
+                    osc.frequency.exponentialRampToValueAtTime(1046.50, now + 0.15);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.linearRampToValueAtTime(110, now + 0.25);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(800, now);
+                    gain.gain.setValueAtTime(0.05, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+                    osc.start(now);
+                    osc.stop(now + 0.03);
+                }
+            } catch (e) {}
+        }
+
+        function getHighScore(diff) {
+            return parseInt(localStorage.getItem(`math_sprint_hs_${diff}`) || '0', 10);
+        }
+
+        function setHighScore(diff, val) {
+            localStorage.setItem(`math_sprint_hs_${diff}`, val);
+        }
+
+        function loadHighScores() {
+            document.getElementById('hs-easy').innerText = getHighScore('easy');
+            document.getElementById('hs-medium').innerText = getHighScore('medium');
+            document.getElementById('hs-hard').innerText = getHighScore('hard');
+        }
+
+        function generateProblem(diff) {
+            let num1, num2, operator, solution;
+
+            if (diff === 'easy') {
+                operator = Math.random() < 0.5 ? '+' : '-';
+                if (operator === '+') {
+                    num1 = Math.floor(Math.random() * 15) + 1;
+                    num2 = Math.floor(Math.random() * 15) + 1;
+                    solution = num1 + num2;
+                } else {
+                    num1 = Math.floor(Math.random() * 20) + 2;
+                    num2 = Math.floor(Math.random() * num1) + 1;
+                    solution = num1 - num2;
+                }
+            } else if (diff === 'medium') {
+                const ops = ['+', '-', '*'];
+                operator = ops[Math.floor(Math.random() * ops.length)];
+
+                if (operator === '+') {
+                    num1 = Math.floor(Math.random() * 45) + 5;
+                    num2 = Math.floor(Math.random() * 45) + 5;
+                    solution = num1 + num2;
+                } else if (operator === '-') {
+                    num1 = Math.floor(Math.random() * 50) + 10;
+                    num2 = Math.floor(Math.random() * num1) + 1;
+                    solution = num1 - num2;
+                } else {
+                    num1 = Math.floor(Math.random() * 10) + 2;
+                    num2 = Math.floor(Math.random() * 10) + 2;
+                    solution = num1 * num2;
+                }
+            } else {
+                const ops = ['+', '-', '*', '/'];
+                operator = ops[Math.floor(Math.random() * ops.length)];
+
+                if (operator === '+') {
+                    num1 = Math.floor(Math.random() * 90) + 10;
+                    num2 = Math.floor(Math.random() * 90) + 10;
+                    solution = num1 + num2;
+                } else if (operator === '-') {
+                    num1 = Math.floor(Math.random() * 100) + 20;
+                    num2 = Math.floor(Math.random() * num1) + 10;
+                    solution = num1 - num2;
+                } else if (operator === '*') {
+                    num1 = Math.floor(Math.random() * 15) + 3;
+                    num2 = Math.floor(Math.random() * 12) + 3;
+                    solution = num1 * num2;
+                } else {
+                    num2 = Math.floor(Math.random() * 10) + 2;
+                    solution = Math.floor(Math.random() * 12) + 2;
+                    num1 = num2 * solution;
+                }
+            }
+
+            let opSymbol = operator;
+            if (operator === '*') opSymbol = '×';
+            if (operator === '/') opSymbol = '÷';
+
+            targetSolution = solution;
+            document.getElementById('question-text').innerText = `${num1} ${opSymbol} ${num2}`;
+        }
+
+        function switchScreen(screenName) {
+            const screens = {
+                menu: document.getElementById('menu-screen'),
+                game: document.getElementById('game-screen'),
+                gameover: document.getElementById('gameover-screen')
+            };
+            Object.keys(screens).forEach(key => screens[key].classList.remove('active'));
+            screens[screenName].classList.add('active');
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timeRemaining = DIFFICULTY_SETTINGS[currentDifficulty].time;
+            totalQuestionTime = timeRemaining;
+            
+            updateTimerBar();
+
+            const startTime = Date.now();
+            timerInterval = setInterval(() => {
+                const elapsed = (Date.now() - startTime) / 1000;
+                timeRemaining = totalQuestionTime - elapsed;
+
+                if (timeRemaining <= 0) {
+                    timeRemaining = 0;
+                    updateTimerBar();
+                    clearInterval(timerInterval);
+                    handleGameOver("Waktu Jawab Habis! ⏱️");
+                } else {
+                    updateTimerBar();
+                }
+            }, 40);
+        }
+
+        function updateTimerBar() {
+            const percentage = Math.max(0, (timeRemaining / totalQuestionTime) * 100);
+            const timerBar = document.getElementById('timer-bar');
+            timerBar.style.width = `${percentage}%`;
+
+            if (percentage > 50) {
+                timerBar.style.background = 'linear-gradient(90deg, #38bdf8, #818cf8)';
+            } else if (percentage > 25) {
+                timerBar.style.background = 'linear-gradient(90deg, #f59e0b, #fbbf24)';
+            } else {
+                timerBar.style.background = 'linear-gradient(90deg, #ef4444, #f87171)';
+            }
+        }
+
+        function handleInput(key) {
+            if (!isGameActive) return;
+            playSound('click');
+
+            if (key === 'clear') {
+                currentAnswer = '';
+            } else if (key === 'backspace') {
+                currentAnswer = currentAnswer.slice(0, -1);
+            } else if (key === 'enter') {
+                submitAnswer();
+                return;
+            } else if (currentAnswer.length < 5) {
+                currentAnswer += key;
+            }
+
+            document.getElementById('answer-display').innerText = currentAnswer;
+        }
+
+        function submitAnswer() {
+            if (currentAnswer === '' || !isGameActive) return;
+
+            const userVal = parseInt(currentAnswer, 10);
+            if (userVal === targetSolution) {
+                streak++;
+                if (streak > maxStreak) maxStreak = streak;
+                totalAnswered++;
+
+                const baseP = DIFFICULTY_SETTINGS[currentDifficulty].basePoints;
+                const multiplier = streak >= 3 ? Math.min(3, 1 + (streak - 2) * 0.5) : 1;
+                const earnedPoints = Math.round(baseP * multiplier);
+                score += earnedPoints;
+
+                if (streak >= 3) {
+                    playSound('combo');
+                } else {
+                    playSound('correct');
+                }
+
+                showFloatingFeedback(`+${earnedPoints} Poin!`, '#38bdf8');
+                updateHUD();
+                nextQuestion();
+            } else {
+                playSound('wrong');
+                const card = document.getElementById('question-card');
+                card.classList.add('shake-anim');
+                setTimeout(() => card.classList.remove('shake-anim'), 380);
+                handleGameOver(`Jawaban Salah! (Harusnya ${targetSolution}) 🚀`);
+            }
+        }
+
+        function showFloatingFeedback(text, color) {
+            const floatFeedback = document.getElementById('float-feedback');
+            floatFeedback.innerText = text;
+            floatFeedback.style.color = color;
+            floatFeedback.classList.add('show');
+            setTimeout(() => {
+                floatFeedback.classList.remove('show');
+            }, 600);
+        }
+
+        function updateHUD() {
+            document.getElementById('score-display').innerText = score;
+            document.getElementById('answered-count-display').innerText = totalAnswered;
+
+            const comboBadge = document.getElementById('combo-badge');
+            if (streak >= 3) {
+                const multiplier = Math.min(3, 1 + (streak - 2) * 0.5);
+                comboBadge.innerText = `🔥 x${multiplier} COMBO (${streak})`;
+                comboBadge.style.display = 'block';
+            } else {
+                comboBadge.style.display = 'none';
+            }
+        }
+
+        function nextQuestion() {
+            currentAnswer = '';
+            document.getElementById('answer-display').innerText = '';
+            generateProblem(currentDifficulty);
+            startTimer();
+        }
+
+        function handleGameOver(reason) {
+            isGameActive = false;
+            clearInterval(timerInterval);
+
+            const previousHS = getHighScore(currentDifficulty);
+            if (score > previousHS) {
+                setHighScore(currentDifficulty, score);
+                triggerConfetti();
+            }
+
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('total-questions').innerText = totalAnswered;
+            document.getElementById('max-streak').innerText = `${maxStreak}🔥`;
+            document.getElementById('final-accuracy').innerText = getHighScore(currentDifficulty);
+            document.getElementById('gameover-reason').innerText = reason;
+
+            loadHighScores();
+            switchScreen('gameover');
+        }
+
+        function startSprint() {
+            score = 0;
+            streak = 0;
+            maxStreak = 0;
+            totalAnswered = 0;
+            currentAnswer = '';
+            isGameActive = true;
+
+            document.getElementById('answer-display').innerText = '';
+            updateHUD();
+            switchScreen('game');
+            nextQuestion();
+        }
+
+        function triggerConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+
+            const pieces = [];
+            const colors = ['#38bdf8', '#818cf8', '#a855f7', '#f59e0b', '#ec4899'];
+
+            for (let i = 0; i < 60; i++) {
+                pieces.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speedY: Math.random() * 3 + 2,
+                    speedX: (Math.random() - 0.5) * 2,
+                    rotation: Math.random() * 360
+                });
+            }
+
+            let timer = 0;
+            function render() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                pieces.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.rotation += 2;
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rotation * Math.PI) / 180);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    ctx.restore();
+                });
+
+                timer++;
+                if (timer < 100) {
+                    requestAnimationFrame(render);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+            render();
+        }
+
+        document.querySelectorAll('.diff-card[data-diff]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.diff-card[data-diff]').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                currentDifficulty = btn.getAttribute('data-diff');
+                playSound('click');
+            });
+        });
+
+        document.getElementById('start-btn').addEventListener('click', () => {
+            playSound('click');
+            startSprint();
+        });
+
+        document.getElementById('restart-btn').addEventListener('click', () => {
+            playSound('click');
+            startSprint();
+        });
+
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            playSound('click');
+            switchScreen('menu');
+        });
+
+        document.getElementById('sound-btn').addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            document.getElementById('sound-btn').innerText = soundEnabled ? '🔊' : '🔇';
+        });
+
+        document.querySelectorAll('.key-tile').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const key = btn.getAttribute('data-key');
+                handleInput(key);
+            });
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (!isGameActive) return;
+
+            if (e.key >= '0' && e.key <= '9') {
+                handleInput(e.key);
+            } else if (e.key === 'Backspace') {
+                handleInput('backspace');
+            } else if (e.key === 'Enter') {
+                handleInput('enter');
+            } else if (e.key === 'c' || e.key === 'C' || e.key === 'Escape') {
+                handleInput('clear');
+            }
+        });
+
+        // Initialize application
+        initStarfield();
+        loadHighScores();
+    </script>
+</body>
+</html>
