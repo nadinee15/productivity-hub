@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -823,6 +824,246 @@
 
     .timer-mode-btn .mode-icon {
       font-size: 1.1rem;
+    }
+
+    .timer-mode-btn .custom-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: var(--primary-light);
+      color: var(--primary-darker);
+      border: 1px solid var(--border-medium);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      margin-left: auto;
+      transition: all 0.2s ease;
+    }
+
+    .timer-mode-btn.active .custom-badge {
+      background: #ffffff;
+      color: var(--primary-darker);
+      box-shadow: 0 2px 6px rgba(219, 39, 119, 0.15);
+    }
+
+    /* Panel Pengaturan Waktu Kustom (Jam & Menit) */
+    .custom-timer-panel {
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 20px rgba(244, 114, 182, 0.14);
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .custom-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border-subtle);
+    }
+
+    .custom-panel-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-darker);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-close-custom-panel {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.05rem;
+      padding: 2px 6px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .btn-close-custom-panel:hover {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    .custom-inputs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .custom-unit-card {
+      background: var(--bg-app);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.2s ease;
+    }
+
+    .custom-unit-card:focus-within {
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+
+    .custom-unit-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stepper-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .btn-stepper {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1.5px solid var(--border-medium);
+      color: var(--primary-dark);
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .btn-stepper:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-darker);
+      transform: scale(1.08);
+    }
+
+    .btn-stepper:active {
+      transform: scale(0.92);
+    }
+
+    .stepper-input {
+      width: 48px;
+      height: 34px;
+      text-align: center;
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary-darker);
+      background: #ffffff;
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition: all 0.2s ease;
+      -moz-appearance: textfield;
+    }
+
+    .stepper-input::-webkit-outer-spin-button,
+    .stepper-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .stepper-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.18);
+    }
+
+    .quick-preset-section {
+      margin-bottom: 14px;
+    }
+
+    .quick-preset-label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .quick-chips-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .quick-chip {
+      padding: 5px 11px;
+      border-radius: var(--radius-full);
+      background: var(--bg-app);
+      border: 1px solid var(--border-subtle);
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .quick-chip:hover {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border-color: var(--border-medium);
+      transform: translateY(-1px);
+    }
+
+    .quick-chip.active {
+      background: linear-gradient(135deg, var(--primary-soft) 0%, #ffe4e6 100%);
+      color: var(--primary-darker);
+      border-color: var(--primary);
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(244, 114, 182, 0.2);
+    }
+
+    .btn-apply-custom {
+      width: 100%;
+      min-height: 42px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: #ffffff;
+      border: none;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(244, 114, 182, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-apply-custom:active {
+      transform: scale(0.97);
+    }
+
+    /* Long clock formatting for hours (e.g. 01:30:00) */
+    .timer-clock.has-hours {
+      font-size: 2.25rem;
+      letter-spacing: -0.03em;
     }
 
     /* Tampilan Waktu Besar */
@@ -1707,7 +1948,7 @@
       <section class="tab-view" id="tab-fokus">
         <div class="timer-container">
 
-          <!-- Pilihan Mode Sesi: Fokus Belajar 25 Menit & Istirahat Santai 5 Menit -->
+          <!-- Pilihan Mode Sesi: Fokus Belajar 25 Menit, Istirahat Santai 5 Menit, & Atur Waktu Sendiri -->
           <div class="timer-modes-wrap">
             <button class="timer-mode-btn active" data-mode="focus" id="mode-btn-focus">
               <span class="mode-icon">🎯</span>
@@ -1716,6 +1957,70 @@
             <button class="timer-mode-btn" data-mode="short" id="mode-btn-short">
               <span class="mode-icon">☕</span>
               <span>Istirahat Santai 5 Menit</span>
+            </button>
+            <button class="timer-mode-btn" data-mode="custom" id="mode-btn-custom">
+              <span class="mode-icon">⏱️</span>
+              <span id="custom-btn-title">Atur Waktu Sendiri (Kustom)</span>
+              <span class="custom-badge" id="custom-active-badge">45m</span>
+            </button>
+          </div>
+
+          <!-- Panel Pengaturan Waktu Kustom (Jam & Menit) -->
+          <div class="custom-timer-panel" id="custom-timer-panel" style="display: none;">
+            <div class="custom-panel-header">
+              <div class="custom-panel-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>Atur Jam & Menit Sesukamu</span>
+              </div>
+              <button type="button" class="btn-close-custom-panel" id="btn-close-custom-panel" title="Tutup Pengaturan" aria-label="Tutup Panel">✕</button>
+            </div>
+
+            <!-- Stepper Input Jam dan Menit -->
+            <div class="custom-inputs-grid">
+              <!-- Kotak Jam -->
+              <div class="custom-unit-card">
+                <span class="custom-unit-label">Jam</span>
+                <div class="stepper-row">
+                  <button type="button" class="btn-stepper" id="btn-dec-hours" aria-label="Kurangi Jam">−</button>
+                  <input type="number" id="custom-input-hours" class="stepper-input" min="0" max="23" value="0" aria-label="Jumlah Jam">
+                  <button type="button" class="btn-stepper" id="btn-inc-hours" aria-label="Tambah Jam">+</button>
+                </div>
+              </div>
+
+              <!-- Kotak Menit -->
+              <div class="custom-unit-card">
+                <span class="custom-unit-label">Menit</span>
+                <div class="stepper-row">
+                  <button type="button" class="btn-stepper" id="btn-dec-minutes" aria-label="Kurangi Menit">−</button>
+                  <input type="number" id="custom-input-minutes" class="stepper-input" min="0" max="59" value="45" aria-label="Jumlah Menit">
+                  <button type="button" class="btn-stepper" id="btn-inc-minutes" aria-label="Tambah Menit">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pilihan Cepat (Quick Preset Chips) -->
+            <div class="quick-preset-section">
+              <span class="quick-preset-label">Pilihan Durasi Cepat:</span>
+              <div class="quick-chips-wrapper">
+                <button type="button" class="quick-chip" data-hours="0" data-minutes="10">10m</button>
+                <button type="button" class="quick-chip" data-hours="0" data-minutes="15">15m</button>
+                <button type="button" class="quick-chip" data-hours="0" data-minutes="30">30m</button>
+                <button type="button" class="quick-chip active" data-hours="0" data-minutes="45">45m</button>
+                <button type="button" class="quick-chip" data-hours="1" data-minutes="0">1 Jam</button>
+                <button type="button" class="quick-chip" data-hours="1" data-minutes="30">1.5 Jam</button>
+                <button type="button" class="quick-chip" data-hours="2" data-minutes="0">2 Jam</button>
+              </div>
+            </div>
+
+            <!-- Tombol Terapkan Waktu -->
+            <button type="button" class="btn-apply-custom" id="btn-apply-custom">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Pasang Waktu Timer</span>
             </button>
           </div>
 
@@ -1978,7 +2283,7 @@
         <ul
           style="font-size: 0.8rem; color: var(--text-secondary); padding-left: 20px; margin-bottom: 16px; line-height: 1.6;">
           <li><b>Tugas:</b> Kelola target harian dengan progres & kategori.</li>
-          <li><b>Fokus:</b> Timer Pomodoro 25 menit dengan suara latar penenang.</li>
+          <li><b>Fokus:</b> Timer Pomodoro (25m, 5m istirahat, atau atur jam & menit sesukamu) dengan suara latar penenang.</li>
           <li><b>Jurnal:</b> Catat rasa syukur dan pantau suasana hati (mood).</li>
         </ul>
         <button id="btn-reset-demo" class="pill-btn"
@@ -2432,6 +2737,13 @@
       short: 5 * 60   // 5 Menit Istirahat Santai
     };
 
+    // Pengaturan Waktu Kustom (Jam & Menit)
+    let customHours = parseInt(localStorage.getItem('prodhub_custom_hours') || '0', 10);
+    let customMinutes = parseInt(localStorage.getItem('prodhub_custom_minutes') || '45', 10);
+    if (isNaN(customHours) || customHours < 0) customHours = 0;
+    if (isNaN(customMinutes) || customMinutes <= 0) customMinutes = 45;
+    let customDurationSeconds = (customHours * 3600) + (customMinutes * 60);
+
     let timerMode = 'focus';
     let timeLeft = TIMER_DURATIONS.focus;
     let timerTotal = TIMER_DURATIONS.focus;
@@ -2450,6 +2762,19 @@
     const pomoMinutesEl = document.getElementById('pomo-minutes-count');
     const timerQuoteEl = document.getElementById('timer-motivational-quote');
 
+    // Elemen Panel Waktu Kustom
+    const customTimerPanel = document.getElementById('custom-timer-panel');
+    const customInputHours = document.getElementById('custom-input-hours');
+    const customInputMinutes = document.getElementById('custom-input-minutes');
+    const customActiveBadge = document.getElementById('custom-active-badge');
+    const btnCloseCustomPanel = document.getElementById('btn-close-custom-panel');
+    const btnApplyCustom = document.getElementById('btn-apply-custom');
+    const btnIncHours = document.getElementById('btn-inc-hours');
+    const btnDecHours = document.getElementById('btn-dec-hours');
+    const btnIncMinutes = document.getElementById('btn-inc-minutes');
+    const btnDecMinutes = document.getElementById('btn-dec-minutes');
+    const quickChips = document.querySelectorAll('.quick-chip');
+
     const modalReflection = document.getElementById('modal-reflection');
     const btnGoToJournal = document.getElementById('btn-go-to-journal');
     const btnReflectionRest = document.getElementById('btn-reflection-rest');
@@ -2465,8 +2790,26 @@
         "Tarik napas dalam, regangkan badanmu 🌿",
         "Minum segelas air putih hangat & rileks 💧",
         "Biarkan otakmu mengendapkan materi tadi ☕"
+      ],
+      custom: [
+        "Atur ritmemu sendiri & raih fokus terbaik! ⏱️",
+        "Fokus berkualitas sesuai durasi pilihanmu 🌸",
+        "Setiap menit belajarmu membawa kemajuan nyata ✨",
+        "Konsisten melangkah, tuntaskan tujuanmu 🌟"
       ]
     };
+
+    function formatCustomDurationText(hours, minutes) {
+      if (hours > 0 && minutes > 0) return `${hours}j ${minutes}m`;
+      if (hours > 0) return `${hours} Jam`;
+      return `${minutes}m`;
+    }
+
+    function formatCustomStatusLabel(hours, minutes) {
+      if (hours > 0 && minutes > 0) return `SESI KUSTOM (${hours} JAM ${minutes} MENIT)`;
+      if (hours > 0) return `SESI KUSTOM (${hours} JAM)`;
+      return `SESI KUSTOM (${minutes} MENIT)`;
+    }
 
     // Alarm Audio Native Menggunakan Web Audio API (Tanpa File Eksternal)
     function playNativeBeepAlarm() {
@@ -2501,13 +2844,21 @@
     }
 
     function updateTimerDisplay() {
-      const minutes = Math.floor(timeLeft / 60);
+      const hours = Math.floor(timeLeft / 3600);
+      const minutes = Math.floor((timeLeft % 3600) / 60);
       const seconds = timeLeft % 60;
-      timerClockDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      if (hours > 0) {
+        timerClockDisplay.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        timerClockDisplay.classList.add('has-hours');
+      } else {
+        timerClockDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        timerClockDisplay.classList.remove('has-hours');
+      }
 
       // Progress stroke: r=105, Circumference = 2 * PI * 105 = ~659.734
       const circumference = 659.734;
-      const progressFraction = (timerTotal - timeLeft) / timerTotal;
+      const progressFraction = timerTotal > 0 ? (timerTotal - timeLeft) / timerTotal : 0;
       const offset = circumference * (1 - progressFraction);
       timerProgressRing.style.strokeDashoffset = offset;
     }
@@ -2521,7 +2872,7 @@
       timerInterval = setInterval(() => {
         if (timeLeft > 0) {
           timeLeft--;
-          if (timerMode === 'focus' && (timerTotal - timeLeft) % 60 === 0 && (timerTotal - timeLeft) > 0) {
+          if ((timerMode === 'focus' || timerMode === 'custom') && (timerTotal - timeLeft) % 60 === 0 && (timerTotal - timeLeft) > 0) {
             focusMinutesTotal++;
             pomoMinutesEl.textContent = focusMinutesTotal + 'm';
           }
@@ -2532,7 +2883,13 @@
       }, 1000);
 
       playTickSound(750, 0.05);
-      showToast(timerMode === 'focus' ? 'Sesi fokus belajar dimulai! Semangat 🎯' : 'Waktu istirahat santai dimulai ☕');
+      let toastMsg = 'Waktu istirahat santai dimulai ☕';
+      if (timerMode === 'focus') {
+        toastMsg = 'Sesi fokus belajar 25 menit dimulai! Semangat 🎯';
+      } else if (timerMode === 'custom') {
+        toastMsg = `Sesi kustom ${formatCustomDurationText(customHours, customMinutes)} dimulai! Semangat ⏱️`;
+      }
+      showToast(toastMsg);
     }
 
     function pauseTimer() {
@@ -2548,8 +2905,9 @@
       timerRunning = false;
       btnTimerStart.classList.remove('active-running');
       clearInterval(timerInterval);
-      timeLeft = TIMER_DURATIONS[timerMode];
-      timerTotal = TIMER_DURATIONS[timerMode];
+      const targetDuration = (timerMode === 'custom') ? customDurationSeconds : TIMER_DURATIONS[timerMode];
+      timeLeft = targetDuration;
+      timerTotal = targetDuration;
       updateTimerDisplay();
       playTickSound(400, 0.05);
       showToast('Waktu timer diatur ulang');
@@ -2563,9 +2921,22 @@
       // Bunyikan nada beep ringkas native via Web Audio API saat 00:00
       playNativeBeepAlarm();
 
-      if (timerMode === 'focus') {
+      if (timerMode === 'focus' || timerMode === 'custom') {
         completedSessions++;
         pomoCountEl.textContent = completedSessions;
+
+        // Sesuaikan teks ajakan refleksi sesuai durasi yang selesai
+        const reflectionDesc = document.querySelector('.reflection-desc');
+        if (reflectionDesc) {
+          const completedHours = Math.floor(timerTotal / 3600);
+          const completedMins = Math.floor((timerTotal % 3600) / 60);
+          let durationLabel = '';
+          if (completedHours > 0 && completedMins > 0) durationLabel = `${completedHours} jam ${completedMins} menit`;
+          else if (completedHours > 0) durationLabel = `${completedHours} jam`;
+          else durationLabel = `${completedMins} menit`;
+
+          reflectionDesc.textContent = `Kerja bagus! Kamu berhasil menuntaskan ${durationLabel} belajar tanpa distraksi. Yuk, catat evaluasi dan apa saja yang kamu pelajari di Jurnal sekarang!`;
+        }
 
         // Munculkan popup ramah ajakan refleksi ke Tab Jurnal
         setTimeout(() => {
@@ -2580,8 +2951,9 @@
 
     function switchTimerMode(mode) {
       timerMode = mode;
-      timerTotal = TIMER_DURATIONS[mode];
-      timeLeft = timerTotal;
+      const targetDuration = (mode === 'custom') ? customDurationSeconds : TIMER_DURATIONS[mode];
+      timerTotal = targetDuration;
+      timeLeft = targetDuration;
 
       document.querySelectorAll('.timer-mode-btn').forEach(btn => {
         if (btn.getAttribute('data-mode') === mode) {
@@ -2593,24 +2965,176 @@
 
       if (mode === 'focus') {
         timerStatusLabel.textContent = 'SESI FOKUS BELAJAR';
-      } else {
+        if (customTimerPanel) customTimerPanel.style.display = 'none';
+      } else if (mode === 'short') {
         timerStatusLabel.textContent = 'ISTIRAHAT SANTAI';
+        if (customTimerPanel) customTimerPanel.style.display = 'none';
+      } else if (mode === 'custom') {
+        timerStatusLabel.textContent = formatCustomStatusLabel(customHours, customMinutes);
+        if (customTimerPanel) {
+          customTimerPanel.style.display = 'block';
+          syncCustomInputs();
+        }
       }
 
       // Quote motivasi acak
-      const quotesList = QUOTES[mode];
+      const quotesList = QUOTES[mode] || QUOTES.focus;
       timerQuoteEl.textContent = quotesList[Math.floor(Math.random() * quotesList.length)];
 
       resetTimer();
+    }
+
+    // Sinkronisasi input dan chip waktu kustom
+    function syncCustomInputs() {
+      if (!customInputHours || !customInputMinutes) return;
+      customInputHours.value = customHours;
+      customInputMinutes.value = customMinutes;
+      updateActiveQuickChip(customHours, customMinutes);
+    }
+
+    function updateActiveQuickChip(h, m) {
+      quickChips.forEach(chip => {
+        const chipH = parseInt(chip.getAttribute('data-hours'), 10);
+        const chipM = parseInt(chip.getAttribute('data-minutes'), 10);
+        if (chipH === h && chipM === m) {
+          chip.classList.add('active');
+        } else {
+          chip.classList.remove('active');
+        }
+      });
     }
 
     // Tombol Pemilih Mode Sesi
     document.querySelectorAll('.timer-mode-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const mode = btn.getAttribute('data-mode');
-        switchTimerMode(mode);
+        if (mode === 'custom' && timerMode === 'custom') {
+          // Toggle buka/tutup panel jika tombol kustom diklik ulang saat sudah aktif
+          if (customTimerPanel) {
+            const isHidden = customTimerPanel.style.display === 'none';
+            customTimerPanel.style.display = isHidden ? 'block' : 'none';
+            if (isHidden) syncCustomInputs();
+            playTickSound(650, 0.04);
+          }
+        } else {
+          switchTimerMode(mode);
+        }
       });
     });
+
+    // Kontrol Stepper Jam & Menit
+    if (btnIncHours && btnDecHours && customInputHours) {
+      btnIncHours.addEventListener('click', () => {
+        let val = parseInt(customInputHours.value, 10) || 0;
+        if (val < 23) val++;
+        customInputHours.value = val;
+        updateActiveQuickChip(val, parseInt(customInputMinutes.value, 10) || 0);
+        playTickSound(700, 0.03);
+      });
+
+      btnDecHours.addEventListener('click', () => {
+        let val = parseInt(customInputHours.value, 10) || 0;
+        if (val > 0) val--;
+        customInputHours.value = val;
+        updateActiveQuickChip(val, parseInt(customInputMinutes.value, 10) || 0);
+        playTickSound(600, 0.03);
+      });
+
+      customInputHours.addEventListener('change', () => {
+        let val = parseInt(customInputHours.value, 10);
+        if (isNaN(val) || val < 0) val = 0;
+        if (val > 23) val = 23;
+        customInputHours.value = val;
+        updateActiveQuickChip(val, parseInt(customInputMinutes.value, 10) || 0);
+      });
+    }
+
+    if (btnIncMinutes && btnDecMinutes && customInputMinutes) {
+      btnIncMinutes.addEventListener('click', () => {
+        let val = parseInt(customInputMinutes.value, 10) || 0;
+        val = val + 5 - (val % 5);
+        if (val > 59) val = 59;
+        customInputMinutes.value = val;
+        updateActiveQuickChip(parseInt(customInputHours.value, 10) || 0, val);
+        playTickSound(700, 0.03);
+      });
+
+      btnDecMinutes.addEventListener('click', () => {
+        let val = parseInt(customInputMinutes.value, 10) || 0;
+        val = val - (val % 5 === 0 ? 5 : val % 5);
+        if (val < 0) val = 0;
+        customInputMinutes.value = val;
+        updateActiveQuickChip(parseInt(customInputHours.value, 10) || 0, val);
+        playTickSound(600, 0.03);
+      });
+
+      customInputMinutes.addEventListener('change', () => {
+        let val = parseInt(customInputMinutes.value, 10);
+        if (isNaN(val) || val < 0) val = 0;
+        if (val > 59) val = 59;
+        customInputMinutes.value = val;
+        updateActiveQuickChip(parseInt(customInputHours.value, 10) || 0, val);
+      });
+    }
+
+    // Quick Chips Handlers
+    quickChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const h = parseInt(chip.getAttribute('data-hours'), 10);
+        const m = parseInt(chip.getAttribute('data-minutes'), 10);
+        if (customInputHours) customInputHours.value = h;
+        if (customInputMinutes) customInputMinutes.value = m;
+        updateActiveQuickChip(h, m);
+        playTickSound(750, 0.04);
+      });
+    });
+
+    // Tutup Panel Kustom
+    if (btnCloseCustomPanel && customTimerPanel) {
+      btnCloseCustomPanel.addEventListener('click', () => {
+        customTimerPanel.style.display = 'none';
+        playTickSound(500, 0.04);
+      });
+    }
+
+    // Terapkan Waktu Kustom
+    if (btnApplyCustom) {
+      btnApplyCustom.addEventListener('click', () => {
+        let h = parseInt(customInputHours.value, 10);
+        let m = parseInt(customInputMinutes.value, 10);
+        if (isNaN(h) || h < 0) h = 0;
+        if (h > 23) h = 23;
+        if (isNaN(m) || m < 0) m = 0;
+        if (m > 59) m = 59;
+
+        customInputHours.value = h;
+        customInputMinutes.value = m;
+
+        const totalSec = (h * 3600) + (m * 60);
+        if (totalSec <= 0) {
+          showToast('Durasi minimal 1 menit ya! 🌸');
+          return;
+        }
+
+        customHours = h;
+        customMinutes = m;
+        customDurationSeconds = totalSec;
+        localStorage.setItem('prodhub_custom_hours', h);
+        localStorage.setItem('prodhub_custom_minutes', m);
+
+        const badgeText = formatCustomDurationText(h, m);
+        if (customActiveBadge) {
+          customActiveBadge.textContent = badgeText;
+          customActiveBadge.style.display = 'inline-block';
+        }
+
+        switchTimerMode('custom');
+        if (customTimerPanel) customTimerPanel.style.display = 'none';
+
+        playCompletionChime();
+        showToast(`Waktu timer berhasil disetel ke ${badgeText}! ✨`);
+      });
+    }
 
     // Tombol Kontrol Ramah Jempol: Mulai, Jeda, Atur Ulang
     btnTimerStart.addEventListener('click', startTimer);
@@ -2628,7 +3152,8 @@
       const journalTitleInput = document.getElementById('journal-input-title');
       const journalContentInput = document.getElementById('journal-input-content');
       journalTitleInput.value = `Evaluasi Belajar Sesi #${completedSessions}`;
-      journalContentInput.placeholder = 'Apa satu materi atau konsep penting yang kamu pahami dalam 25 menit fokus tadi?';
+      const sessionDurationStr = formatCustomDurationText(Math.floor(timerTotal / 3600), Math.floor((timerTotal % 3600) / 60));
+      journalContentInput.placeholder = `Apa satu materi atau konsep penting yang kamu pahami dalam ${sessionDurationStr} fokus tadi?`;
       journalContentInput.focus();
 
       showToast('Waktunya mencatat evaluasi belajarmu di Jurnal! 🌸');
@@ -2864,6 +3389,10 @@
       updateDateAndGreeting();
       renderTasks();
       updateNavBadge();
+      if (customActiveBadge) {
+        customActiveBadge.textContent = formatCustomDurationText(customHours, customMinutes);
+      }
+      syncCustomInputs();
       updateTimerDisplay();
       renderJournals();
     });
